@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "table-load-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/tableLoad/TableLoadWebPart.js",
+          "manifest": "./src/webparts/tableLoad/TableLoadWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "TableLoadWebPartStrings": "lib/webparts/tableLoad/loc/{locale}.js"
+  }
+}
