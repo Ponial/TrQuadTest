@@ -1,65 +1,78 @@
  import * as React from 'react';
+ import { Suspense } from 'react';
 import styles from './TableLoad.module.scss';
 import { escape } from '@microsoft/sp-lodash-subset';
 
-import { ITaleResultProps } from './ITableLoadProps';
+import { IPricesTable, IRequestedTable, ITaleResultProps } from './ITableLoadProps';
 import { IIconProps } from '@fluentui/react';
 import { ActionButton } from '@fluentui/react/lib/Button';
-
+import TableLoadWebPart from '../TableLoadWebPart'
+//import {renderTableData} from './TableDraw/RenderTableData';
 const DownloadButton: IIconProps = { iconName: 'Download' };
+import {TableBackEnd} from './Sripts/Tablebackend';
 
-export default class TableLoad extends React.Component<ITaleResultProps, {}> {
+
+ async function renderTableData() {
+   return await (await TableBackEnd()).map((items, index) => {
+      const { RequestName, RequestNumber, Amount, Price, Attachment, Status } = items ;//destructuring
+      return (
+         <tr key={RequestName}>
+            <td>{RequestName}</td>
+            <td>{RequestNumber}</td>
+            <td>{Amount}</td>
+            <td>{Price}</td>
+            <td className='opration'>
+            <ActionButton iconProps={DownloadButton} allowDisabledFocus onClick={() => this._GetItems()}>
+            Download
+             </ActionButton>
+            </td>
+            <td>{Status}</td>
+         </tr>
+      );
+   });
+}
+
+Promise.resolve();
+ function testtable(){
+   console.log(renderTableData());
+   console.log('alive')
+}
+
+export interface ITableLoadState {
+   TableRow: Array<JSX.Element>
+} 
+
+export default class TableLoad extends React.Component<ITaleResultProps, ITableLoadState> {
    public constructor(props) {
       super(props);
 
 
       this.state = {
-        items: []
+       TableRow: null
       };
     }
 
-  
 
-  private  _GetItems = () => {
-    console.log("Attempt to PNP SP1");
-   var item = this.props.TeTestingSPsting();
-    console.log(item);
-    console.log("Attempt to PNP SP2");
-  }
-
-  private Tableget(){
-    var items = this.props.TableBackEnd();
-    console.log(items);
-    return items;
-  }
-
- private renderTableData() {
-    return this.Tableget().map((items, index) => {
-       const { RequestName, RequestNumber, Amount, Price, Attachment, Status } = items ;//destructuring
-       return (
-          <tr key={RequestName}>
-             <td>{RequestName}</td>
-             <td>{RequestNumber}</td>
-             <td>{Amount}</td>
-             <td>{Price}</td>
-             <td className='opration'>
-             <ActionButton iconProps={DownloadButton} allowDisabledFocus onClick={() => this._GetItems()}>
-             Download
-              </ActionButton>
-             </td>
-             <td>{Status}</td>
-          </tr>
-       );
-    });
+  componentDidMount() {
+   renderTableData().then(data =>{
+    debugger;
+      this.setState({
+         TableRow: data
+     })
+   }
+   );
  }
-//{this.renderTableHeader()}
 
-    public render() {
+
+   public render() {
+   const  {TableRow}  = this.state;
+
     return (
       <div className={ styles.tableLoad }>
          <div className={styles.title}> <h1 id='title'>Test 3 table</h1></div>
          <div className={styles.Table}>
          <table id='RequestName'>
+         <Suspense fallback={<h1>Loading profile...</h1>}>
             <tbody>
                <tr>
                   <th>Название заказа</th>
@@ -69,8 +82,9 @@ export default class TableLoad extends React.Component<ITaleResultProps, {}> {
                   <th>Attachment</th>
                   <th>Статус</th>
                </tr>
-               {this.renderTableData()}
+               {TableRow}
             </tbody>
+         </Suspense>
          </table>
          </div>
       </div>
@@ -78,4 +92,5 @@ export default class TableLoad extends React.Component<ITaleResultProps, {}> {
     }
 
 }
+
 

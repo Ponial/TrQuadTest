@@ -26,6 +26,6 @@ export interface IPricesTable{
 }
 
 export interface ITaleResultProps{
-  TableBackEnd: () => IRequestedTable[];
+  MainWebCaller: () => IRequestedTable[];
   TeTestingSPsting: () => IPricesTable[];
   }
