@@ -10,10 +10,11 @@ import "@pnp/sp/items";
 import "@pnp/sp/attachments";
 
 
-export async function getAtachment(){ 
+export async function getAtachment(i){ 
     console.log("Here be Atachment")
- //  const item = await sp.web.lists.getByTitle("Price");
- //  result = item.attachmentFiles();
- //   return (result);
+    console.log(i);
+ // const item: IItem  = await sp.web.lists.getByTitle("Price").items.getById(i);
+ // const result = await item.attachmentFiles();
+ //  return (result);
     
       }

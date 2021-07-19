@@ -7,7 +7,6 @@ import { IPricesTable, IRequestedTable, ITaleResultProps } from './ITableLoadPro
 import { IIconProps } from '@fluentui/react';
 import { ActionButton } from '@fluentui/react/lib/Button';
 import TableLoadWebPart from '../TableLoadWebPart'
-//import {renderTableData} from './TableDraw/RenderTableData';
 const DownloadButton: IIconProps = { iconName: 'Download' };
 import {TableBackEnd} from './Sripts/Tablebackend';
 import {getAtachment} from './Sripts/getAtachment'
@@ -23,7 +22,7 @@ import {getAtachment} from './Sripts/getAtachment'
             <td>{Amount}</td>
             <td>{Price}</td>
             <td className='opration'>
-            <ActionButton iconProps={DownloadButton} allowDisabledFocus onClick={() => this._GetAtachment()}>
+            <ActionButton iconProps={DownloadButton} allowDisabledFocus onClick={() => this._GetAtachment(parseInt(RequestName.slice(0, 1)))}>
             Download
              </ActionButton>
             </td>
@@ -33,8 +32,8 @@ import {getAtachment} from './Sripts/getAtachment'
    });
 }
 
-function _GetAtachment(){
-   getAtachment();
+async function _GetAtachment(i){
+   getAtachment(i);
 }
 
 export interface ITableLoadState {

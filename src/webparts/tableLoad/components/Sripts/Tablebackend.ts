@@ -20,10 +20,6 @@ export async function TableBackEnd(): Promise<IRequestedTable[]>{
         this.Status = Status;
       }
       for(var i=0; i<(await requests).length; i++){
-        console.log(parseInt(prices[0].Title));
-        console.log(prices[0].TrPrices);
-        console.log();
-        console.log();
           if(requests[i].TrNumberOfCopies <= parseInt(prices[0].Title)){
             requests[i].TrCurrency = prices[0].TrPrices;
           }else if(requests[i].TrNumberOfCopies <= parseInt(prices[0].Title) ){
