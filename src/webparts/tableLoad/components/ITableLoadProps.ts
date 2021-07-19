@@ -12,17 +12,20 @@ Attachment: any;
 }
 
 export interface IRequestTable{
-title: string;
+Title: string;
 TrOrderDate: string;
 TrStatus: string;
 TrNumberOfCopies:number;
 TrCurrency: number;
-TrResponsible: string;
   }
 
 export interface IPricesTable{
-  Ammount: number;
-  Curency: number;
+  Title: string;
+  TrPrices: number;
+}
+
+export interface Iatachemnt{
+
 }
 
 export interface ITaleResultProps{

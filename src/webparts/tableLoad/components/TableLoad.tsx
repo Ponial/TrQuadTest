@@ -10,6 +10,7 @@ import TableLoadWebPart from '../TableLoadWebPart'
 //import {renderTableData} from './TableDraw/RenderTableData';
 const DownloadButton: IIconProps = { iconName: 'Download' };
 import {TableBackEnd} from './Sripts/Tablebackend';
+import {getAtachment} from './Sripts/getAtachment'
 
 
  async function renderTableData() {
@@ -22,7 +23,7 @@ import {TableBackEnd} from './Sripts/Tablebackend';
             <td>{Amount}</td>
             <td>{Price}</td>
             <td className='opration'>
-            <ActionButton iconProps={DownloadButton} allowDisabledFocus onClick={() => this._GetItems()}>
+            <ActionButton iconProps={DownloadButton} allowDisabledFocus onClick={() => this._GetAtachment()}>
             Download
              </ActionButton>
             </td>
@@ -32,10 +33,8 @@ import {TableBackEnd} from './Sripts/Tablebackend';
    });
 }
 
-Promise.resolve();
- function testtable(){
-   console.log(renderTableData());
-   console.log('alive')
+function _GetAtachment(){
+   getAtachment();
 }
 
 export interface ITableLoadState {
@@ -54,15 +53,13 @@ export default class TableLoad extends React.Component<ITaleResultProps, ITableL
 
 
   componentDidMount() {
-   renderTableData().then(data =>{
-    debugger;
+   renderTableData().then(data =>{     
       this.setState({
          TableRow: data
      })
    }
    );
  }
-
 
    public render() {
    const  {TableRow}  = this.state;
@@ -72,7 +69,6 @@ export default class TableLoad extends React.Component<ITaleResultProps, ITableL
          <div className={styles.title}> <h1 id='title'>Test 3 table</h1></div>
          <div className={styles.Table}>
          <table id='RequestName'>
-         <Suspense fallback={<h1>Loading profile...</h1>}>
             <tbody>
                <tr>
                   <th>Название заказа</th>
@@ -84,7 +80,6 @@ export default class TableLoad extends React.Component<ITaleResultProps, ITableL
                </tr>
                {TableRow}
             </tbody>
-         </Suspense>
          </table>
          </div>
       </div>

@@ -40,12 +40,6 @@ export default class TableLoadWebPart extends BaseClientSideWebPart<ITableLoadWe
         });
       }
 
-  /**
-   * For testing of SP PNP, results 403 forbiden
-   * **/
-   /*
-   *meh Returns requested  data as per the requirents in test3 for interns 
-   */
 
   public render(): void {
     const element: React.ReactElement<IRequestTable> = React.createElement(
