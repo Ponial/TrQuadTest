@@ -24,9 +24,6 @@ export interface IPricesTable{
   TrPrices: number;
 }
 
-export interface Iatachemnt{
-
-}
 
 export interface ITaleResultProps{
   MainWebCaller: () => IRequestedTable[];

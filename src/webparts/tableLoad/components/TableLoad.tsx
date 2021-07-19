@@ -22,7 +22,7 @@ import {getAtachment} from './Sripts/getAtachment'
             <td>{Amount}</td>
             <td>{Price}</td>
             <td className='opration'>
-            <ActionButton iconProps={DownloadButton} allowDisabledFocus onClick={() => this._GetAtachment(parseInt(RequestName.slice(0, 1)))}>
+            <ActionButton iconProps={DownloadButton} allowDisabledFocus onClick={() => getAtachment(parseInt(RequestNumber.slice(0, 1)) - 1)}>
             Download
              </ActionButton>
             </td>
@@ -30,10 +30,6 @@ import {getAtachment} from './Sripts/getAtachment'
          </tr>
       );
    });
-}
-
-async function _GetAtachment(i){
-   getAtachment(i);
 }
 
 export interface ITableLoadState {

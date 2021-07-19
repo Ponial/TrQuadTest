@@ -15,6 +15,5 @@ export async function getAtachment(i){
     console.log(i);
  // const item: IItem  = await sp.web.lists.getByTitle("Price").items.getById(i);
  // const result = await item.attachmentFiles();
- //  return (result);
-    
+ //  return (result);    
       }
